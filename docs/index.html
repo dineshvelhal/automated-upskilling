@@ -1,0 +1,126 @@
+<html>
+  <head></head>
+  <body>
+  <h1 id="upskill-server">Upskill Server</h1>
+<p>Upskill server Docker image is a fun way to define Test Automation Coding Assignments and publish them to your team or a group of enthusiasts. They can complete the assignment and submit their answers which can be auto-evaluated and scored with an option of manual grading as well.</p>
+<h2 id="how-to-use-the-upskill-server-">How to use the Upskill Server?</h2>
+<p>You can use the Upskill Server as an Instructor or as a Student.</p>
+<p><strong>As an Instructor, you can</strong></p>
+<ul>
+<li>Define assignments (Optionally set deadlines for submission)</li>
+<li>Add coding questions to the assignments and assign the marks to them</li>
+<li>Release Assignments to students</li>
+<li>Evaluate students&#39; submissions with a single-click Auto-Evaluation</li>
+<li>Manually evaluate students&#39; submissions</li>
+<li>Generate the score cards for Students</li>
+</ul>
+<p><strong>As a student, you can</strong></p>
+<ul>
+<li>Pull the assignments released by the instructor</li>
+<li>Work on the assignment questions by writing code</li>
+<li>Write/edit/run code using the In-Browser IDE</li>
+<li>Evaluate the answers before submitting the assignment</li>
+<li>Submit the assignment</li>
+<li>See the score when the Instructor evaluates your assignment</li>
+<li>See the review comments given by your Instructor</li>
+</ul>
+<h2 id="what-is-an-assignment-">What is an assignment?</h2>
+<ul>
+<li>Every assignment is a set of questions</li>
+<li>Instructor can define a set of <code>tests</code> that will be used by Auto-Evaluator to evaluate the answers</li>
+<li>The <code>tests</code> can be exposed, kept hidden or exposed partially with the students as decided by the Instructor</li>
+<li>Answering questions involves writing code to solve the problem given in the assignment</li>
+<li>Assignment can have a setup step that defines prerequisites needed to complete the assignment</li>
+<li>Assignments have <code>Evaluate</code> button that the students can use to evaluate their answers before submitting</li>
+</ul>
+<h2 id="what-is-this-demo-about-">What is this demo about?</h2>
+<p>This is a quick demo of how to use the Upskill-Server for defining assignments for your teams in a fun way. This demo has one sample assignment on the topic of API testing using <code>REST-Assured</code> tool.</p>
+<p>When you run the demo, 2 containers start running. One is the <code>Upskill Server</code>. The other is the <code>API-Server</code> used as dummy/mock APIs to be used by students to solve the questions in the assignment.</p>
+<h2 id="how-to-run-the-demo-in-3-easy-steps-in-10-minutes-">How to run the demo in 3 easy steps in 10 minutes?!</h2>
+<p><strong>Prerequisite - Docker is installed on your machine</strong></p>
+<ol>
+<li>Clone the git repository <a href="https://github.com/dineshvelhal/upskill-server-demo">https://github.com/dineshvelhal/upskill-server-demo</a><pre><code class="lang-bash">git <span class="hljs-keyword">clone</span> <span class="hljs-title">dineshvelhal</span>/upskill-server-demo
+cd upskill-server-demo
+</code></pre>
+</li>
+<li>Start the containers using the <code>docker-compose</code> command<pre><code class="lang-bash"><span class="hljs-attribute">docker-compose up</span>
+</code></pre>
+</li>
+</ol>
+<p>docker-compose file contents:</p>
+<pre><code><span class="hljs-attribute">version</span>: '3.3'
+
+<span class="less"><span class="hljs-attribute">services</span>:
+  <span class="hljs-attribute">upskill-server</span>:
+    <span class="hljs-attribute">image</span>: <span class="hljs-string">"dineshvelhal/upskill-server:latest"</span>
+    <span class="hljs-attribute">container_name</span>: <span class="hljs-string">"upskill-server"</span>
+    <span class="hljs-attribute">networks</span>:
+      - upskill_net
+    <span class="hljs-attribute">ports</span>:
+      - <span class="hljs-string">"8000:8000"</span>
+
+  <span class="hljs-attribute">api-server</span>:
+    <span class="hljs-attribute">image</span>: <span class="hljs-string">"dineshvelhal/json-server-demo:latest"</span>
+    <span class="hljs-attribute">container_name</span>: <span class="hljs-string">"api-server"</span>
+    <span class="hljs-attribute">networks</span>:
+      - upskill_net
+    <span class="hljs-attribute">ports</span>:
+      - <span class="hljs-string">"80:80"</span>
+
+<span class="hljs-attribute">networks</span>:
+  <span class="hljs-attribute">upskill_net</span>:</span>
+</code></pre><p>This demo comes with 4 user accounts - one Instructor and 3 Students</p>
+<ul>
+<li><strong>albus</strong> - Instructor</li>
+<li><strong>harry</strong> - Student</li>
+<li><strong>ron</strong> - Student</li>
+<li><p><strong>hermione</strong> - Student</p>
+</li>
+<li><p>set the passwords for all 4 accounts. 
+For this you need to start a shell in the Upskill-Server container and set the user passwords using the <code>passwd</code> command. This is a one time activity.</p>
+<pre><code class="lang-bash"><span class="hljs-symbol">docker</span> exec -ti upskill-server <span class="hljs-keyword">bash
+</span><span class="hljs-symbol">passwd</span> albus
+<span class="hljs-symbol">passwd</span> harry
+<span class="hljs-symbol">password</span> ron
+<span class="hljs-symbol">passwd</span> hermione
+</code></pre>
+<p>Please note that the <code>passwd</code> command is interactive so you need to set the passwords by entering them twice for each user.</p>
+</li>
+</ul>
+<p>Well Done! now you are all set to use the Upskill server. Open the upskill server URL (<a href="http://localhost:8000">Upskill Server</a>) in a browser and log in using the Instructor or Student account. The Mock APIs to be used for the assignments can be accessed by opening the URL <a href="http://localhost:80">API Server</a></p>
+<p>When you log in as an Instructor, you will see a sample assignment is available in home directory. You can use it to get yourself familiar with Upskill Server.</p>
+<h3 id="upskill-server-is-based-on-a-set-of-awesome-open-source-tools-available-for-general-use-">Upskill server is based on a set of awesome Open-Source tools available for general use.</h3>
+<ul>
+<li><a href="https://github.com/jupyter/nbgrader">NBGrader</a> - A system for assigning and grading Jupyter notebooks.</li>
+<li><a href="https://github.com/jupyter/notebook">Jupyter Notebooks</a> - web-based notebook environment for interactive computing</li>
+<li><a href="https://github.com/jupyterhub/jupyterhub">Jupyterhub</a> - a multi-user environment for Jupyter Notebooks</li>
+<li><a href="https://github.com/jupyterlab/jupyterlab">Jupyter Lab</a> - a next generation IDE for Jupyter Notebooks</li>
+<li><a href="https://github.com/SpencerPark/IJava">IJava Kernel for Jupyter Notebooks</a> - A Jupyter kernel for executing Java code in Jupyter Notebooks</li>
+</ul>
+<h3 id="how-to-use-nbgrader-for-setting-using-assignments-">How to use NBGrader for setting / using assignments?</h3>
+<ul>
+<li><a href="https://nbgrader.readthedocs.io/en/stable/user_guide/highlights.html">Overview</a></li>
+<li><a href="https://nbgrader.readthedocs.io/en/stable/">NBGrader Documentation</a></li>
+</ul>
+<h3 id="please-note-this-demo-is-only-for-local-use-please-don-t-host-it-on-public-facing-server-or-in-production-environment-">Please note - This demo is only for local use. Please don&#39;t host it on public facing server or in Production environment.</h3>
+<h3 id="sample-screenshots">Sample Screenshots</h3>
+<ul>
+<li><p>Assignment (Student&#39;s view)
+<img src="assignment.JPG" alt="Assignment-Student View"></p>
+</li>
+<li><p>Self-validation by student before submitting the assignment
+<img src="StudentSelfValidation.JPG" alt="Self vaidation"></p>
+</li>
+<li><p><strong>Manage Assignmets</strong> view for Instructor
+<img src="ManageAssignment.JPG" alt="Manage assignments"></p>
+</li>
+<li><p>Ealuate assignment view of the Instructor
+<img src="EvaluateSubmission.JPG" alt="Evaluate assignments"></p>
+</li>
+<li><p>Ealuated assignment view
+<img src="EvaluatedSubmission.JPG" alt="Evaluated assignments"></p>
+</li>
+</ul>
+
+  </body>
+</html>
