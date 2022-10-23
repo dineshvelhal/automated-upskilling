@@ -113,3 +113,18 @@ When you log in as an Instructor, you will see a sample assignment is available 
 
 ### Please note - This demo is only for local use. Please don't host it on public facing server or in Production environment.
 
+### Sample Screenshots
+- Assignment (Student's view)
+![Assignment-Student View](assignment.JPG)
+
+- Self-validation by student before submitting the assignment
+![Self vaidation](StudentSelfValidation.JPG)
+
+- __Manage Assignmets__ view for Instructor
+![Manage assignments](ManageAssignment.JPG)
+
+- Ealuate assignment view of the Instructor
+![Evaluate assignments](EvaluateSubmission.JPG)
+
+- Ealuated assignment view
+![Evaluated assignments](EvaluatedSubmission.JPG)
